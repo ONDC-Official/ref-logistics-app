@@ -109,19 +109,9 @@ function subtractISODurations(duration1ISO:any, duration2ISO:any) {
       const minutes = parseInt(matches[3], 10) || 0;
       const seconds = parseInt(matches[4], 10) || 0;
 
-      return {
-        days,
-        hours,
-        minutes,
-        seconds
-      };
+      return { days, hours, minutes, seconds };
     }
-    return {
-      days: 0,
-      hours: 0,
-      minutes: 0,
-      seconds: 0
-    };
+    return { days: 0, hours: 0, minutes: 0, seconds: 0 };
   };
 
   const duration1 = parseISODuration(duration1ISO);
@@ -130,7 +120,8 @@ function subtractISODurations(duration1ISO:any, duration2ISO:any) {
   let totalSeconds1 = duration1.days * 86400 + duration1.hours * 3600 + duration1.minutes * 60 + duration1.seconds;
   let totalSeconds2 = duration2.days * 86400 + duration2.hours * 3600 + duration2.minutes * 60 + duration2.seconds;
 
-  let totalSeconds = totalSeconds1 - totalSeconds2;
+  // Get the absolute difference in total seconds
+  let totalSeconds = Math.abs(totalSeconds1 - totalSeconds2);
 
   const days = Math.floor(totalSeconds / 86400);
   totalSeconds %= 86400;
@@ -169,9 +160,3 @@ export function startRangeAndEndRange({currentTimeIsoString,duration,tat}:{curre
     }
   }
 }
-
-
-
-
-
-
